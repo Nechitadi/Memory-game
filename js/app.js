@@ -71,20 +71,26 @@ let hideCards = function() {
 	console.log(openCards);
 }
 
+//increase the moves counter
+let move = 0;
+let moves = function() {
+	move++;
+	$('.moves').text(move);
+}
 
 let openCards = [];
 
 cards.click(function() {
 	$(this).addClass("open show");
 	openCards = $('.open');
-	console.log(openCards);
 	if(openCards.length === 2) {
 		if(cardsMatched()) {
 		openCards.addClass("match");
 		hideCards();
+		moves();
 		} else {
 			hideCards();
-
+			moves();
 		}	
 	}
 });

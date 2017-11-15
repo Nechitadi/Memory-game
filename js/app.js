@@ -3,6 +3,7 @@ let cardsImages = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa f
 let deck = $('.deck');
 let cardHtml = [];
 let cards = $('.card');
+let winMessage = $('.win-message');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -54,7 +55,9 @@ cards.each(function (index) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
+let openCards = [];
+let move = 0;
+let matchedCardsArray = [];
 //returns 1 if the cards matched
 let cardsMatched = function() {
 	if(openCards[0].innerHTML === openCards[1].innerHTML) {
@@ -68,17 +71,26 @@ let cardsMatched = function() {
 let hideCards = function() {
 	openCards.removeClass("open");
 	openCards.removeClass("show");
+	//openCards.css("background", "#2e3d49");
 	console.log(openCards);
 }
 
 //increase the moves counter
-let move = 0;
 let moves = function() {
 	move++;
-	$('.moves').text(move);
+	if(move === 1) {
+		$('.moves').text(move + " Move");
+	} else {
+		$('.moves').text(move + " Moves");
+	}
 }
 
-let openCards = [];
+let win = function () {
+	deck.addClass('hidden');
+	winMessage.html(`<h2>Congratulations! You Won!</h2>
+		<p>With ${move} Moves and. Woooooo!</p>
+		<button class="play-again">Play again</button>`);
+}
 
 cards.click(function() {
 	$(this).addClass("open show");
@@ -87,14 +99,34 @@ cards.click(function() {
 		if(cardsMatched()) {
 		openCards.addClass("match");
 		hideCards();
+		//openCards.css("background", "#02ccba");
 		moves();
 		} else {
-			hideCards();
+			//openCards.css('background', 'red');
+			setTimeout(func, 500);
+			function func() {
+				hideCards(); 
+			}
+			//openCards.css('background', '#2e3d49');
 			moves();
 		}	
 	}
+	matchedCardsArray = $('.match');
+	//show win message
+	if(matchedCardsArray.length == 16) {
+		win();
+	}
+	//start a new game
+	$('.play-again').click(function() {
+		matchedCardsArray.removeClass('match');
+		matchedCardsArray.removeClass('open');
+		matchedCardsArray.removeClass('show');
+		winMessage.html('');
+		deck.removeClass('hidden');
+		move = -1;
+		moves();
+	});
 });
-
 
 
 

@@ -1,8 +1,8 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
+//create a list that holds all the cards images
+let cardsImages = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"]
+let deck = $('.deck');
+let cardHtml = [];
+let cards = $('.card');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -25,6 +25,24 @@ function shuffle(array) {
     return array;
 }
 
+shuffle(cardsImages);
+console.log(cardsImages);
+//cards.addClass('match');
+
+//loop through each card and create its HTML
+let createCardHtml = function () {
+	for(let i = 0; i < cardsImages.length; i++) {
+		cardHtml[i] = `<i class="${cardsImages[i]}"></i>`;
+	}
+	return cardHtml;	
+}
+
+createCardHtml();
+
+//add each card's HTML to the page
+cards.each(function (index) {
+    $(this).html(cardHtml[index]);
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +54,4 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+

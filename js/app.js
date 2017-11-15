@@ -55,3 +55,46 @@ cards.each(function (index) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+//returns 1 if the cards matched
+let cardsMatched = function() {
+	if(openCards[0].innerHTML === openCards[1].innerHTML) {
+	return 1;
+	} else {
+		return 0;
+	}
+};
+
+//flips back the cards
+let hideCards = function() {
+	openCards.removeClass("open");
+	openCards.removeClass("show");
+	console.log(openCards);
+}
+
+
+let openCards = [];
+
+cards.click(function() {
+	$(this).addClass("open show");
+	openCards = $('.open');
+	console.log(openCards);
+	if(openCards.length === 2) {
+		if(cardsMatched()) {
+		openCards.addClass("match");
+		hideCards();
+		} else {
+			hideCards();
+
+		}	
+	}
+});
+
+
+
+
+
+
+
+
+
+

@@ -96,11 +96,11 @@ cards.click(function() {
 	$(this).addClass("open show");
 	openCards = $('.open');
 	if(openCards.length === 2) {
-		if(cardsMatched()) {
-		openCards.addClass("match");
-		hideCards();
-		//openCards.css("background", "#02ccba");
-		moves();
+		if (cardsMatched()) {
+			openCards.addClass("match");
+			hideCards();
+			//openCards.css("background", "#02ccba");
+			moves();
 		} else {
 			//openCards.css('background', 'red');
 			setTimeout(func, 500);
@@ -112,6 +112,9 @@ cards.click(function() {
 		}	
 	}
 	matchedCardsArray = $('.match');
+	if(move >= 14) {
+
+	}
 	//show win message
 	if(matchedCardsArray.length == 16) {
 		win();
@@ -126,6 +129,18 @@ cards.click(function() {
 		move = -1;
 		moves();
 	});
+	
+	$('.restart').click(function() {
+		matchedCardsArray.removeClass('match');
+		matchedCardsArray.removeClass('open');
+		matchedCardsArray.removeClass('show');
+		winMessage.html('');
+		deck.removeClass('hidden');
+		move = -1;
+		moves();
+	});
+
+
 });
 
 

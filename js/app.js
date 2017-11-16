@@ -159,7 +159,7 @@ let newGame = function() {
 	closeModal();
 }
 
-cards.addClass('show');
+//cards.addClass('show');
 // Flag which permits the timer to
 let flag = 1;
 

@@ -192,13 +192,14 @@ cards.click(function() {
 	}
 	matchedCardsArray = $('.match');
 
-	if(move >= 2) {
-		$('#star3').addClass('lostStar');
-	} else if(move >= 4) {
-		$('#star2').addClass('lostStar');
-	} else if(move >= 5) {
-		$('#star1').addClass('lostStar');
-	}
+	// if(move >= 2) {
+	// 	$('#star3').addClass('lostStar');
+	// 	star
+	// } else if(move >= 4) {
+	// 	$('#star2').addClass('lostStar');
+	// } else if(move >= 5) {
+	// 	$('#star1').addClass('lostStar');
+	// }
 	//show win message
 	if(matchedCardsArray.length == 16) {
 		win();

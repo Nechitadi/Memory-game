@@ -108,8 +108,7 @@ let moves = function() {
 // Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.html(`<h2>Congratulations! You Won!</h2>
-		<p>With ${move} Moves and. Woooooo!</p>`);
+	winMessage.html(`<p>with <strong>${move}</strong> Moves after <strong>${time}</strong> seconds. Woooooo!</p>`);
 	openModal();
 }
 

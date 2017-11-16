@@ -28,7 +28,6 @@ function shuffle(array) {
 
 shuffle(cardsImages);
 console.log(cardsImages);
-//cards.addClass('match');
 
 //loop through each card and create its HTML
 let createCardHtml = function () {
@@ -85,6 +84,7 @@ let moves = function() {
 	}
 }
 
+//adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
 	winMessage.html(`<h2>Congratulations! You Won!</h2>
@@ -128,6 +128,7 @@ cards.click(function() {
 		deck.removeClass('hidden');
 		move = -1;
 		moves();
+		//shuffle(cardsImages);
 	});
 	
 	$('.restart').click(function() {
@@ -138,6 +139,7 @@ cards.click(function() {
 		deck.removeClass('hidden');
 		move = -1;
 		moves();
+		//shuffle(cards);
 	});
 
 

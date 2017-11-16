@@ -131,7 +131,7 @@ h1 {
 }
 
 .modal {
-    //display: none;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -175,4 +175,8 @@ h1 {
     padding: 1em;
     border-radius: 10px;
     background-color: #30b7bf;
+}
+
+.lostStar {
+    color: #fff;
 }

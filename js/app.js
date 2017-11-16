@@ -159,6 +159,8 @@ let newGame = function() {
 	closeModal();
 }
 
+// Initial number of stars
+let stars = 3;
 cards.addClass('show');
 // Flag which permits the timer to
 let flag = 1;
@@ -189,9 +191,15 @@ cards.click(function() {
 		}	
 	}
 	matchedCardsArray = $('.match');
-	if(move >= 14) {
 
-	}
+	// if(move >= 2) {
+	// 	$('#star3').addClass('lostStar');
+	// 	star
+	// } else if(move >= 4) {
+	// 	$('#star2').addClass('lostStar');
+	// } else if(move >= 5) {
+	// 	$('#star1').addClass('lostStar');
+	// }
 	//show win message
 	if(matchedCardsArray.length == 16) {
 		win();
@@ -201,7 +209,6 @@ cards.click(function() {
 	restartBtn.click(newGame);
 
 });
-
 
 
 

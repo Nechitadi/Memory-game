@@ -33,9 +33,14 @@ h1 {
     font-weight: 300;
 }
 
+.timer {
+    margin-right: 10px;
+    width: 200px;
+}
 /*
  * Styles for the deck of cards
  */
+
 
 .deck {
     width: 660px;
@@ -119,4 +124,55 @@ h1 {
 
 .win-message {
 	text-align: center;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    margin: 20% auto;
+    padding: 20px;
+    width: 70%;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 7px, 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.close-btn {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+}
+
+.close-btn:hover, .close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fa-trophy {
+    color: gold;
+    font-size: 200px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+#play-again {
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #30b7bf;
 }

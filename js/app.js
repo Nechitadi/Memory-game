@@ -1,3 +1,54 @@
+// Timer functionality
+let time;
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+
+function setTime()
+{
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds%60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+    minutes = pad(totalSeconds%60);
+    seconds = pad(parseInt(totalSeconds/60));
+}
+
+function pad(val)
+{
+    var valString = val + "";
+    if(valString.length < 2)
+    {
+        return "0" + valString;
+        console.log(valString);
+    }
+    else
+    {
+        return valString;    
+    }
+}
+
+
+// Modal functionality
+
+// Get modal element
+let modal = $('#simpleModal');
+// Get close button
+let closeBtn = $('.close-btn');
+// Get Play 
+let playAgainBtn = $('#play-again');
+// Get Restart Button
+let restartBtn = $('.restart');
+// Function to open modal;
+let openModal = function() {
+	modal.css('display', 'block'); 
+}
+// Function to close modal;
+let closeModal = function() {
+	modal.css('display', 'none'); 
+}
+//Listen for click to close modal with close button
+closeBtn.click(closeModal);
+
 //create a list that holds all the cards images
 let cardsImages = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"]
 let deck = $('.deck');
@@ -28,7 +79,6 @@ function shuffle(array) {
 
 shuffle(cardsImages);
 console.log(cardsImages);
-//cards.addClass('match');
 
 //loop through each card and create its HTML
 let createCardHtml = function () {
@@ -71,6 +121,7 @@ let cardsMatched = function() {
 let hideCards = function() {
 	openCards.removeClass("open");
 	openCards.removeClass("show");
+	openCards = [];
 	//openCards.css("background", "#2e3d49");
 	console.log(openCards);
 }
@@ -79,35 +130,61 @@ let hideCards = function() {
 let moves = function() {
 	move++;
 	if(move === 1) {
-		$('.moves').text(move + " Move");
+		$('.moves').text("   " + move + " Move");
 	} else {
-		$('.moves').text(move + " Moves");
+		$('.moves').text("   " + move + " Moves");
 	}
 }
 
+// Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.html(`<h2>Congratulations! You Won!</h2>
-		<p>With ${move} Moves and. Woooooo!</p>
-		<button class="play-again">Play again</button>`);
+	winMessage.append(`<p>With <strong>${move}</strong> Moves after ${pad(parseInt(totalSeconds/60))} minutes and ${pad(totalSeconds%60)} seconds. Woooooo!</p>`);
+	openModal();
+	clearInterval(time);
+	totalSeconds = 0;
 }
 
+//<strong>${time}</strong>
+
+// New game function
+let newGame = function() {
+	matchedCardsArray.removeClass('match');
+	matchedCardsArray.removeClass('open');
+	matchedCardsArray.removeClass('show');
+	winMessage.html('');
+	deck.removeClass('hidden');
+	move = -1;
+	moves();
+	closeModal();
+}
+
+//cards.addClass('show');
+// Flag which permits the timer to
+let flag = 1;
+
 cards.click(function() {
-	$(this).addClass("open show");
+	// Start timer
+	if(flag) {
+		time = setInterval(setTime, 1000);
+		flag = 0;
+	}
+	//debugger;
+	if(openCards.length < 2) {
+		$(this).addClass("open show");
+	}
+	// $(this).addClass("open show");
 	openCards = $('.open');
 	if(openCards.length === 2) {
 		if (cardsMatched()) {
 			openCards.addClass("match");
 			hideCards();
-			//openCards.css("background", "#02ccba");
 			moves();
 		} else {
-			//openCards.css('background', 'red');
 			setTimeout(func, 500);
 			function func() {
 				hideCards(); 
 			}
-			//openCards.css('background', '#2e3d49');
 			moves();
 		}	
 	}
@@ -120,26 +197,8 @@ cards.click(function() {
 		win();
 	}
 	//start a new game
-	$('.play-again').click(function() {
-		matchedCardsArray.removeClass('match');
-		matchedCardsArray.removeClass('open');
-		matchedCardsArray.removeClass('show');
-		winMessage.html('');
-		deck.removeClass('hidden');
-		move = -1;
-		moves();
-	});
-	
-	$('.restart').click(function() {
-		matchedCardsArray.removeClass('match');
-		matchedCardsArray.removeClass('open');
-		matchedCardsArray.removeClass('show');
-		winMessage.html('');
-		deck.removeClass('hidden');
-		move = -1;
-		moves();
-	});
-
+	playAgainBtn.click(newGame);
+	restartBtn.click(newGame);
 
 });
 

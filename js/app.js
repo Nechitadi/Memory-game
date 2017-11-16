@@ -139,7 +139,7 @@ let moves = function() {
 // Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.html(`<p>with <strong>${move}</strong> Moves after ${pad(parseInt(totalSeconds/60))} minutes and ${pad(totalSeconds%60)} seconds. Woooooo!</p>`);
+	winMessage.append(`<p>With <strong>${move}</strong> Moves after ${pad(parseInt(totalSeconds/60))} minutes and ${pad(totalSeconds%60)} seconds. Woooooo!</p>`);
 	openModal();
 	clearInterval(time);
 	totalSeconds = 0;

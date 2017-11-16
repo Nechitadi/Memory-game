@@ -126,6 +126,10 @@ h1 {
 	text-align: center;
 }
 
+.modal-body {
+    text-align: center;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -158,3 +162,17 @@ h1 {
     cursor: pointer;
 }
 
+.fa-trophy {
+    color: gold;
+    font-size: 200px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+#play-again {
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #30b7bf;
+}

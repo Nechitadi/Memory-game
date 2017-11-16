@@ -33,9 +33,19 @@ h1 {
     font-weight: 300;
 }
 
+.timer {
+    margin-right: 10px;
+    width: 200px;
+}
+
+.stars {
+    position: fixed;
+}
+
 /*
  * Styles for the deck of cards
  */
+
 
 .deck {
     width: 660px;
@@ -152,3 +162,4 @@ h1 {
     text-decoration: none;
     cursor: pointer;
 }
+

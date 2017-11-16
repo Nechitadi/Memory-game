@@ -1,3 +1,32 @@
+// Timer functionality
+
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+setInterval(setTime, 1000);
+
+function setTime()
+{
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds%60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+}
+
+function pad(val)
+{
+    var valString = val + "";
+    if(valString.length < 2)
+    {
+        return "0" + valString;
+        console.log(valString);
+    }
+    else
+    {
+        return valString;    
+    }
+}
+
+
 // Modal functionality
 
 // Get modal element
@@ -91,6 +120,7 @@ let cardsMatched = function() {
 let hideCards = function() {
 	openCards.removeClass("open");
 	openCards.removeClass("show");
+	openCards = [];
 	//openCards.css("background", "#2e3d49");
 	console.log(openCards);
 }
@@ -99,9 +129,9 @@ let hideCards = function() {
 let moves = function() {
 	move++;
 	if(move === 1) {
-		$('.moves').text(move + " Move");
+		$('.moves').text("   " + move + " Move");
 	} else {
-		$('.moves').text(move + " Moves");
+		$('.moves').text("   " + move + " Moves");
 	}
 }
 
@@ -125,21 +155,22 @@ let newGame = function() {
 }
 
 cards.click(function() {
-	$(this).addClass("open show");
+	//debugger;
+	if(openCards.length < 2) {
+		$(this).addClass("open show");
+	}
+	// $(this).addClass("open show");
 	openCards = $('.open');
 	if(openCards.length === 2) {
 		if (cardsMatched()) {
 			openCards.addClass("match");
 			hideCards();
-			//openCards.css("background", "#02ccba");
 			moves();
 		} else {
-			//openCards.css('background', 'red');
 			setTimeout(func, 500);
 			function func() {
 				hideCards(); 
 			}
-			//openCards.css('background', '#2e3d49');
 			moves();
 		}	
 	}

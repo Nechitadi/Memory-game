@@ -1,5 +1,5 @@
 // Timer functionality
-
+let time;
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
@@ -9,6 +9,8 @@ function setTime()
     ++totalSeconds;
     secondsLabel.innerHTML = pad(totalSeconds%60);
     minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+    minutes = pad(totalSeconds%60);
+    seconds = pad(parseInt(totalSeconds/60));
 }
 
 function pad(val)
@@ -137,9 +139,13 @@ let moves = function() {
 // Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.html(`<p>with <strong>${move}</strong> Moves after <strong>${time}</strong> seconds. Woooooo!</p>`);
+	winMessage.html(`<p>with <strong>${move}</strong> Moves after ${pad(parseInt(totalSeconds/60))} minutes and ${pad(totalSeconds%60)} seconds. Woooooo!</p>`);
 	openModal();
+	clearInterval(time);
+	totalSeconds = 0;
 }
+
+//<strong>${time}</strong>
 
 // New game function
 let newGame = function() {
@@ -153,13 +159,14 @@ let newGame = function() {
 	closeModal();
 }
 
-// Flag which permits the timer to start
+cards.addClass('show');
+// Flag which permits the timer to
 let flag = 1;
 
 cards.click(function() {
 	// Start timer
 	if(flag) {
-		setInterval(setTime, 1000);
+		time = setInterval(setTime, 1000);
 		flag = 0;
 	}
 	//debugger;
@@ -192,7 +199,6 @@ cards.click(function() {
 	//start a new game
 	playAgainBtn.click(newGame);
 	restartBtn.click(newGame);
-
 
 });
 

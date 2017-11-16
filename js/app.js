@@ -3,7 +3,6 @@
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
 let totalSeconds = 0;
-setInterval(setTime, 1000);
 
 function setTime()
 {
@@ -154,7 +153,15 @@ let newGame = function() {
 	closeModal();
 }
 
+// Flag which permits the timer to start
+let flag = 1;
+
 cards.click(function() {
+	// Start timer
+	if(flag) {
+		setInterval(setTime, 1000);
+		flag = 0;
+	}
 	//debugger;
 	if(openCards.length < 2) {
 		$(this).addClass("open show");

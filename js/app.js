@@ -1,3 +1,24 @@
+// Modal functionality
+
+// Get modal element
+let modal = $('#simpleModal');
+// Get close button
+let closeBtn = $('.close-btn');
+// Get Play 
+let playAgainBtn = $('#play-again');
+// Get Restart Button
+let restartBtn = $('.restart');
+// Function to open modal;
+let openModal = function() {
+	modal.css('display', 'block'); 
+}
+// Function to close modal;
+let closeModal = function() {
+	modal.css('display', 'none'); 
+}
+//Listen for click to close modal with close button
+closeBtn.click(closeModal);
+
 //create a list that holds all the cards images
 let cardsImages = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"]
 let deck = $('.deck');
@@ -84,12 +105,24 @@ let moves = function() {
 	}
 }
 
-//adds win message to the page and hides the cards deck
+// Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
 	winMessage.html(`<h2>Congratulations! You Won!</h2>
-		<p>With ${move} Moves and. Woooooo!</p>
-		<button class="play-again">Play again</button>`);
+		<p>With ${move} Moves and. Woooooo!</p>`);
+	openModal();
+}
+
+// New game function
+let newGame = function() {
+	matchedCardsArray.removeClass('match');
+	matchedCardsArray.removeClass('open');
+	matchedCardsArray.removeClass('show');
+	winMessage.html('');
+	deck.removeClass('hidden');
+	move = -1;
+	moves();
+	closeModal();
 }
 
 cards.click(function() {
@@ -120,27 +153,8 @@ cards.click(function() {
 		win();
 	}
 	//start a new game
-	$('.play-again').click(function() {
-		matchedCardsArray.removeClass('match');
-		matchedCardsArray.removeClass('open');
-		matchedCardsArray.removeClass('show');
-		winMessage.html('');
-		deck.removeClass('hidden');
-		move = -1;
-		moves();
-		//shuffle(cardsImages);
-	});
-	
-	$('.restart').click(function() {
-		matchedCardsArray.removeClass('match');
-		matchedCardsArray.removeClass('open');
-		matchedCardsArray.removeClass('show');
-		winMessage.html('');
-		deck.removeClass('hidden');
-		move = -1;
-		moves();
-		//shuffle(cards);
-	});
+	playAgainBtn.click(newGame);
+	restartBtn.click(newGame);
 
 
 });

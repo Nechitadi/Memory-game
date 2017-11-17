@@ -77,8 +77,7 @@ function shuffle(array) {
     return array;
 }
 
-shuffle(cardsImages);
-console.log(cardsImages);
+
 
 //loop through each card and create its HTML
 let createCardHtml = function () {
@@ -88,13 +87,18 @@ let createCardHtml = function () {
 	return cardHtml;	
 }
 
-createCardHtml();
+let shuffleAndAssignDeck = function() {
+	shuffle(cardsImages);
+	console.log(cardsImages);
+	createCardHtml();
 
-//add each card's HTML to the page
-cards.each(function (index) {
-    $(this).html(cardHtml[index]);
-});
+	//add each card's HTML to the page
+	cards.each(function (index) {
+	    $(this).html(cardHtml[index]);
+	});
+}
 
+shuffleAndAssignDeck();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -156,8 +160,7 @@ let newGame = function() {
 	move = -1;
 	moves();
 	closeModal();
-	shuffle(cardsImages);
-	console.log(cardsImages);
+	shuffleAndAssignDeck();
 	totalSeconds = 0;
 	flag = 0;
 	stars = 3;
@@ -168,20 +171,10 @@ let newGame = function() {
 
 // Restart game function
 let restartGame = function() {
-	//matchedCardsArray.removeClass('match');
-	//matchedCardsArray.removeClass('open');
-	//matchedCardsArray.removeClass('show');
-	//winMessage.html('');
-	//deck.removeClass('hidden');
 	move = -1;
 	moves();
 	closeModal();
-	shuffle(cardsImages);
-	createCardHtml();
-	cards.each(function (index) {
-    	$(this).html(cardHtml[index]);
-	});
-	console.log(cardsImages);
+	shuffleAndAssignDeck();
 	totalSeconds = 0;
 	flag = 0;
 	stars = 3;
@@ -258,11 +251,10 @@ cards.click(function() {
 		win();
 	}
 
-	//start a new game
-	playAgainBtn.click(newGame);
-
 });
 
+//start a new game
+playAgainBtn.click(newGame);
 restartBtn.click(restartGame);
 });
 

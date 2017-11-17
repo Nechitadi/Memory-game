@@ -139,7 +139,7 @@ let moves = function() {
 // Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.append(`<p>With <strong>${move}</strong> Moves after ${pad(parseInt(totalSeconds/60))} minutes and ${pad(totalSeconds%60)} seconds. Woooooo!</p>`);
+	winMessage.append(`<p>You got ${noOfStars} with <strong>${move}</strong> Moves after <strong>${pad(parseInt(totalSeconds/60))}</strong> minutes and <strong>${pad(totalSeconds%60)}</strong> seconds. Woooooo!</p>`);
 	openModal();
 	clearInterval(time);
 	totalSeconds = 0;
@@ -159,7 +159,8 @@ let newGame = function() {
 	closeModal();
 }
 
-//cards.addClass('show');
+let noOfStars = 3;
+cards.addClass('show');
 // Flag which permits the timer to
 let flag = 1;
 
@@ -189,9 +190,21 @@ cards.click(function() {
 		}	
 	}
 	matchedCardsArray = $('.match');
-	if(move >= 14) {
 
+
+	if(move > 14) {
+		// Removes one of the stars above the deck
+		$('#star3').addClass('lostAStar');
+		// Set the number of remaining stars
+		noOfStars = 2;
 	}
+	if(move > 16) {
+		// Removes another star above the deck
+		$('#star2').addClass('lostAStar');
+		// Set the number of remaining stars
+		noOfStars = 1;
+	}
+
 	//show win message
 	if(matchedCardsArray.length == 16) {
 		win();

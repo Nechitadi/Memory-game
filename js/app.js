@@ -139,7 +139,7 @@ let moves = function() {
 // Adds win message to the page and hides the cards deck
 let win = function () {
 	deck.addClass('hidden');
-	winMessage.append(`<p>You got ${noOfStars} with <strong>${move}</strong> Moves after <strong>${pad(parseInt(totalSeconds/60))}</strong> minutes and <strong>${pad(totalSeconds%60)}</strong> seconds. Woooooo!</p>`);
+	winMessage.append(`<p>You got ${displayStarNumber()} with <strong>${move}</strong> Moves after <strong>${pad(parseInt(totalSeconds/60))}</strong> minutes and <strong>${pad(totalSeconds%60)}</strong> seconds. Woooooo!</p>`);
 	openModal();
 	clearInterval(time);
 	totalSeconds = 0;
@@ -160,6 +160,14 @@ let newGame = function() {
 }
 
 let noOfStars = 3;
+let displayStarNumber = function() {
+	if(noOfStars === 1) {
+		return noOfStars + " Star";
+	} else {
+		return noOfStars + " Stars";
+	}
+}
+
 cards.addClass('show');
 // Flag which permits the timer to
 let flag = 1;

@@ -20,7 +20,6 @@ function pad(val)
     if(valString.length < 2)
     {
         return "0" + valString;
-        console.log(valString);
     }
     else
     {
@@ -158,6 +157,31 @@ let newGame = function() {
 	moves();
 	closeModal();
 	shuffle(cardsImages);
+	console.log(cardsImages);
+	totalSeconds = 0;
+	flag = 0;
+	stars = 3;
+	$('#star3').removeClass('lostAStar');
+	$('#star2').removeClass('lostAStar');
+
+}
+
+// Restart game function
+let restartGame = function() {
+	//matchedCardsArray.removeClass('match');
+	//matchedCardsArray.removeClass('open');
+	//matchedCardsArray.removeClass('show');
+	//winMessage.html('');
+	//deck.removeClass('hidden');
+	move = -1;
+	moves();
+	closeModal();
+	shuffle(cardsImages);
+	createCardHtml();
+	cards.each(function (index) {
+    	$(this).html(cardHtml[index]);
+	});
+	console.log(cardsImages);
 	totalSeconds = 0;
 	flag = 0;
 	stars = 3;
@@ -199,7 +223,7 @@ let startTimer = function() {
 	}
 }
 
-//cards.addClass('show');
+cards.addClass('show');
 
 // Flag which permits the timer to start only at the first click on the deck
 let flag = 1;
@@ -233,13 +257,14 @@ cards.click(function() {
 	if(matchedCardsArray.length == 16) {
 		win();
 	}
+
 	//start a new game
 	playAgainBtn.click(newGame);
-	restartBtn.click(newGame);
-});
+
 });
 
-
+restartBtn.click(restartGame);
+});
 
 
 

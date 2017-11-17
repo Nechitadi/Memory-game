@@ -237,9 +237,9 @@ cards.click(function() {
 		} else {
 			setTimeout(func, 500);
 			function func() {
-				hideCards(); 
-			}
-			moves();
+				hideCards();
+				moves();
+			}	
 		}	
 	}
 	matchedCardsArray = $('.match');

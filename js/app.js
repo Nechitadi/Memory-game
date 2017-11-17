@@ -1,3 +1,4 @@
+$(document).ready(function() {
 // Timer functionality
 let time;
 let minutesLabel = document.getElementById("minutes");
@@ -44,7 +45,7 @@ let openModal = function() {
 }
 // Function to close modal;
 let closeModal = function() {
-	modal.css('display', 'none'); 
+	modal.css('display', 'none');
 }
 //Listen for click to close modal with close button
 closeBtn.click(closeModal);
@@ -108,6 +109,7 @@ cards.each(function (index) {
 let openCards = [];
 let move = 0;
 let matchedCardsArray = [];
+
 //returns 1 if the cards matched
 let cardsMatched = function() {
 	if(openCards[0].innerHTML === openCards[1].innerHTML) {
@@ -142,10 +144,8 @@ let win = function () {
 	winMessage.append(`<p>You got ${displayStarNumber()} with <strong>${move}</strong> Moves after <strong>${pad(parseInt(totalSeconds/60))}</strong> minutes and <strong>${pad(totalSeconds%60)}</strong> seconds. Woooooo!</p>`);
 	openModal();
 	clearInterval(time);
-	totalSeconds = 0;
-}
 
-//<strong>${time}</strong>
+}
 
 // New game function
 let newGame = function() {
@@ -157,9 +157,32 @@ let newGame = function() {
 	move = -1;
 	moves();
 	closeModal();
+	shuffle(cardsImages);
+	totalSeconds = 0;
+	flag = 0;
+	stars = 3;
+	$('#star3').removeClass('lostAStar');
+	$('#star2').removeClass('lostAStar');
+
 }
 
 let noOfStars = 3;
+//Function which sets the correct number of stars above the deck
+let setStars = function() {
+	if(move > 14) {
+		// Removes one of the stars above the deck
+		$('#star3').addClass('lostAStar');
+		// Set the number of remaining stars
+		noOfStars = 2;
+	}
+	if(move > 16) {
+		// Removes another star above the deck
+		$('#star2').addClass('lostAStar');
+		// Set the number of remaining stars
+		noOfStars = 1;
+	}
+}
+
 let displayStarNumber = function() {
 	if(noOfStars === 1) {
 		return noOfStars + " Star";
@@ -168,21 +191,26 @@ let displayStarNumber = function() {
 	}
 }
 
-cards.addClass('show');
-// Flag which permits the timer to
-let flag = 1;
-
-cards.click(function() {
-	// Start timer
+//Start timer
+let startTimer = function() {
 	if(flag) {
 		time = setInterval(setTime, 1000);
 		flag = 0;
 	}
-	//debugger;
+}
+
+cards.addClass('show');
+
+// Flag which permits the timer to start only at the first click on the deck
+let flag = 1;
+
+cards.click(function() {
+	startTimer();
+
 	if(openCards.length < 2) {
 		$(this).addClass("open show");
 	}
-	// $(this).addClass("open show");
+
 	openCards = $('.open');
 	if(openCards.length === 2) {
 		if (cardsMatched()) {
@@ -199,19 +227,7 @@ cards.click(function() {
 	}
 	matchedCardsArray = $('.match');
 
-
-	if(move > 14) {
-		// Removes one of the stars above the deck
-		$('#star3').addClass('lostAStar');
-		// Set the number of remaining stars
-		noOfStars = 2;
-	}
-	if(move > 16) {
-		// Removes another star above the deck
-		$('#star2').addClass('lostAStar');
-		// Set the number of remaining stars
-		noOfStars = 1;
-	}
+	setStars();
 
 	//show win message
 	if(matchedCardsArray.length == 16) {
@@ -220,9 +236,8 @@ cards.click(function() {
 	//start a new game
 	playAgainBtn.click(newGame);
 	restartBtn.click(newGame);
-
 });
-
+});
 
 
 

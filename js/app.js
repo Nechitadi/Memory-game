@@ -216,7 +216,7 @@ let startTimer = function() {
 	}
 }
 
-cards.addClass('show');
+//cards.addClass('show');
 
 // Flag which permits the timer to start only at the first click on the deck
 let flag = 1;

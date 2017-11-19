@@ -150,6 +150,10 @@ let win = function () {
 
 }
 
+
+// Flag which permits the timer to start only at the first click on the deck
+let flag = 0;
+
 // New game function
 let newGame = function() {
 	matchedCardsArray.removeClass('match');
@@ -163,20 +167,7 @@ let newGame = function() {
 	shuffleAndAssignDeck();
 	totalSeconds = 0;
 	flag = 0;
-	stars = 3;
-	$('#star3').removeClass('lostAStar');
-	$('#star2').removeClass('lostAStar');
-
-}
-
-// Restart game function
-let restartGame = function() {
-	move = -1;
-	moves();
-	closeModal();
-	shuffleAndAssignDeck();
-	totalSeconds = 0;
-	flag = 0;
+	//startTimer();
 	stars = 3;
 	$('#star3').removeClass('lostAStar');
 	$('#star2').removeClass('lostAStar');
@@ -211,17 +202,15 @@ let displayStarNumber = function() {
 //Start timer
 let startTimer = function() {
 	if(flag) {
-		time = setInterval(setTime, 1000);
-		flag = 0;
+		flag = 1;
+		setInterval(setTime, 1000);
 	}
 }
 
-//cards.addClass('show');
-
-// Flag which permits the timer to start only at the first click on the deck
-let flag = 1;
+cards.addClass('show');
 
 cards.click(function() {
+	flag = 1;
 	startTimer();
 
 	if(openCards.length < 2) {
@@ -249,13 +238,14 @@ cards.click(function() {
 	//show win message
 	if(matchedCardsArray.length == 16) {
 		win();
+		totalSeconds = 0;
 	}
 
 });
 
 //start a new game
 playAgainBtn.click(newGame);
-restartBtn.click(restartGame);
+restartBtn.click(newGame);
 });
 
 

@@ -204,7 +204,7 @@ let startTimer = function() {
 	}
 }
 
-cards.addClass('show');
+//cards.addClass('show');
 
 cards.click(function() {
 	startTimer();

@@ -43,6 +43,7 @@ h1 {
 
 
 .deck {
+    max-width: 90%;
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -57,6 +58,8 @@ h1 {
 }
 
 .deck .card {
+    max-width: 23%;
+    //max-height: 15vh;
     height: 125px;
     width: 125px;
     background: #2e3d49;
@@ -92,6 +95,7 @@ h1 {
  */
 
 .score-panel {
+    max-width: 95%;
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
@@ -115,15 +119,15 @@ h1 {
 }
 
 .incorrect-guess {
-	background: red;
+    background: red;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .win-message {
-	text-align: center;
+    text-align: center;
 }
 
 .modal-body {
@@ -147,7 +151,7 @@ h1 {
     margin: 5% auto;
     padding: 20px;
     width: 70%;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 0 7px, 20px 0 rgba(0, 0, 0, 0.17);
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
 .close-btn {
@@ -179,4 +183,55 @@ h1 {
 
 .lostAStar {
     color: #fff;
+}
+
+.deck .card.notmatch {
+  background: #f95c3c;
+}
+
+@media screen and (max-width: 625px) {
+    .deck .card {
+        max-height: 110px;
+        max-width: 110px;
+        margin-top: 0.3em;
+    }
+    .deck {
+        min-height: 0;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .deck .card {
+        max-height: 90px;
+        max-width: 90px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .deck .card {
+        max-height: 80px;
+        max-width: 80px;
+    }
+}
+
+@media screen and (max-width: 443px) {
+    .deck .card {
+        max-height: 70px;
+        max-width: 70px;
+    }
+}
+
+@media screen and (max-width: 395px) {
+    .deck .card {
+        max-height: 60px;
+        max-width: 60px;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .deck .card {
+        max-height: 50px;
+        max-width: 50px;
+
+    }
 }

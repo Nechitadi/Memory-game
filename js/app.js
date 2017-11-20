@@ -126,6 +126,7 @@ let cardsMatched = function() {
 let hideCards = function() {
 	openCards.removeClass("open");
 	openCards.removeClass("show");
+	openCards.removeClass('notmatch');
 	openCards = [];
 	//openCards.css("background", "#2e3d49");
 	console.log(openCards);
@@ -146,13 +147,11 @@ let win = function () {
 	deck.addClass('hidden');
 	winMessage.append(`<p>You got ${displayStarNumber()} with <strong>${move}</strong> Moves after <strong>${pad(parseInt(totalSeconds/60))}</strong> minutes and <strong>${pad(totalSeconds%60)}</strong> seconds. Woooooo!</p>`);
 	openModal();
-	clearInterval(time);
-
 }
 
 
 // Flag which permits the timer to start only at the first click on the deck
-let flag = 0;
+let flag = 1;
 
 // New game function
 let newGame = function() {
@@ -166,8 +165,6 @@ let newGame = function() {
 	closeModal();
 	shuffleAndAssignDeck();
 	totalSeconds = 0;
-	flag = 0;
-	//startTimer();
 	stars = 3;
 	$('#star3').removeClass('lostAStar');
 	$('#star2').removeClass('lostAStar');
@@ -202,16 +199,16 @@ let displayStarNumber = function() {
 //Start timer
 let startTimer = function() {
 	if(flag) {
-		flag = 1;
-		setInterval(setTime, 1000);
+		time = setInterval(setTime, 1000);
+		flag = 0;
 	}
 }
 
 cards.addClass('show');
 
 cards.click(function() {
-	flag = 1;
 	startTimer();
+	//flag = 0;
 
 	if(openCards.length < 2) {
 		$(this).addClass("open show");
@@ -228,7 +225,8 @@ cards.click(function() {
 			function func() {
 				hideCards();
 				moves();
-			}	
+			}
+
 		}	
 	}
 	matchedCardsArray = $('.match');

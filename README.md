@@ -33,3 +33,4 @@ If 2 consecutive cards match, they remain displayed and their color is changed.
 If 2 consecutive cards don't match, thir image is hidden.
 
 When the game finishes (all the cards matched) a modal with a congratulating message is displayed. It also contains the number of stars gained (3 - for completing the game in 14 moves or less, 2 - for completing the game in 15 or 16 moves and 1 - for completing the game in more than 16 moves), the time needed to finish the game and the number of moves. 
+![modal](screenshots/modal.png "This is how the modal looks")

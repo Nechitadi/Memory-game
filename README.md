@@ -34,3 +34,21 @@ If 2 consecutive cards don't match, thir image is hidden.
 
 When the game finishes (all the cards matched) a modal with a congratulating message is displayed. It also contains the number of stars gained (3 - for completing the game in 14 moves or less, 2 - for completing the game in 15 or 16 moves and 1 - for completing the game in more than 16 moves), the time needed to finish the game and the number of moves. 
 ![modal](screenshots/modal.png "This is how the modal looks")
+
+#### Inspiration sources
+
+- For the shuffle function and the timer: [Stack Overflow](https://stackoverflow.com/)
+- For the modal [Traversy Media Youtube channel](https://www.youtube.com/watch?v=6ophW7Ask_0&t=1046s)
+
+#### Text editor used
+
+- [Sublime Text 3](https://www.sublimetext.com/)
+- With emmet plugin
+
+#### Browser 
+
+- Google Chrome
+
+### Main obstacles 
+
+- the timer functionality
